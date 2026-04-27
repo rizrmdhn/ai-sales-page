@@ -1,0 +1,32 @@
+{
+  "name": "ai-sales-page",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:web": "turbo -F web dev",
+    "dev:server": "turbo -F server dev",
+    "db:push": "turbo -F @ai-sales-page/db db:push",
+    "db:studio": "turbo -F @ai-sales-page/db db:studio",
+    "db:generate": "turbo -F @ai-sales-page/db db:generate",
+    "db:migrate": "turbo -F @ai-sales-page/db db:migrate"
+  },
+  "dependencies": {
+    "@ai-sales-page/env": "workspace:*",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@ai-sales-page/config": "workspace:*",
+    "@types/bun": "catalog:",
+    "turbo": "^2.8.12",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@10.29.2"
+}
