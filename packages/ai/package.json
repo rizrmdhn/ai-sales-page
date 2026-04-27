@@ -11,6 +11,10 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "typescript": "^5.5.0"
+    "typescript": "catalog:"
+  },
+  "dependencies": {
+    "@google/genai": "^1.50.1",
+    "mime": "^4.1.0"
   }
 }
