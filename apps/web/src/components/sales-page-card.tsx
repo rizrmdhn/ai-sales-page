@@ -1,4 +1,4 @@
-import { SalesPage } from "@ai-sales-page/types/sales-pages.types";
+import type { SalesPage } from "@ai-sales-page/db";
 import { IconEye, IconRefresh, IconTrash } from "@tabler/icons-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";

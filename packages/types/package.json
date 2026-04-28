@@ -13,7 +13,5 @@
   "devDependencies": {
     "typescript": "catalog:"
   },
-  "dependencies": {
-    "@ai-sales-page/db": "workspace:*"
-  }
+  "dependencies": {}
 }
