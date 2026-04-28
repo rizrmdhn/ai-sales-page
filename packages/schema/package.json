@@ -1,21 +1,19 @@
 {
-  "name": "@ai-sales-page/ai",
+  "name": "@ai-sales-page/schema",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    "./*": "./src/*.ts"
   },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "check-types": "tsc --noEmit"
   },
+  "dependencies": {
+    "zod": "catalog:"
+  },
   "devDependencies": {
     "typescript": "catalog:"
-  },
-  "dependencies": {
-    "@ai-sales-page/schema": "workspace:*",
-    "@google/genai": "^1.50.1",
-    "mime": "^4.1.0"
   }
 }

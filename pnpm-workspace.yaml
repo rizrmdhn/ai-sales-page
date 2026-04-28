@@ -14,3 +14,4 @@ catalog:
   "@trpc/client": ^11.16.0
   "@types/react-dom": ^19.2.3
   "uuid": ^14.0.0
+  "date-fns": ^4.1.0
