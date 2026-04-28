@@ -100,7 +100,10 @@ export const authRouter = createTRPCRouter({
 
       if (err) throw toTRPCError(err);
 
-      return result;
+      return {
+        ...result,
+        password: undefined,
+      };
     }),
 
   me: publicProcedure.query(async ({ ctx }) => {

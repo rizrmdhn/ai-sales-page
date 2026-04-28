@@ -116,7 +116,7 @@ function RouteComponent() {
                           type="button"
                           variant="ghost"
                           size="sm"
-                          className="absolute top-0 right-0 h-full px-3 py-2 text-slate-500 hover:bg-transparent hover:text-slate-700"
+                          className="absolute top-0 right-0 h-full px-3 py-2"
                           onClick={() => {
                             setType((prev) =>
                               prev === "password" ? "text" : "password",
