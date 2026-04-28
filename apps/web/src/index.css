@@ -131,3 +131,8 @@
     @apply font-sans;
     }
 }
+
+@utility dot-grid {
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
