@@ -139,6 +139,9 @@ importers:
       '@ai-sales-page/schema':
         specifier: workspace:*
         version: link:../../packages/schema
+      '@ai-sales-page/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@base-ui/react':
         specifier: ^1.4.1
         version: 1.4.1(@date-fns/tz@1.4.1)(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -454,6 +457,10 @@ importers:
         version: 6.0.3
 
   packages/types:
+    dependencies:
+      '@ai-sales-page/db':
+        specifier: workspace:*
+        version: link:../db
     devDependencies:
       typescript:
         specifier: 'catalog:'

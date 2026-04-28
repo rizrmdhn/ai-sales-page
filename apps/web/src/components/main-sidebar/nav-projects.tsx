@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  IconFolder,
   IconDots,
+  IconFolder,
   IconShare,
   IconTrash,
   type TablerIcon,
@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuAction,
   SidebarMenuButton,
@@ -38,7 +37,6 @@ export function NavProjects({
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
@@ -47,10 +45,7 @@ export function NavProjects({
               <span>{item.name}</span>
             </SidebarMenuButton>
             <DropdownMenu>
-              <SidebarMenuAction
-                render={<DropdownMenuTrigger />}
-                showOnHover
-              >
+              <SidebarMenuAction render={<DropdownMenuTrigger />} showOnHover>
                 <IconDots />
                 <span className="sr-only">More</span>
               </SidebarMenuAction>
