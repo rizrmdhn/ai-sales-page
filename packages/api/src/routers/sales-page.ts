@@ -13,15 +13,21 @@ import { createTRPCRouter, protectedProcedure } from "..";
 import { toTRPCError } from "../utils/to-trpc-error";
 
 export const salesPageRouter = createTRPCRouter({
-  list: protectedProcedure.query(async ({ ctx }) => {
-    const [salesPages, error] = await tryCatchAsync(() =>
-      getAllUserSalesPages(ctx.user.id),
-    );
+  list: protectedProcedure
+    .input(
+      z.object({
+        search: z.optional(z.string()),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const [salesPages, error] = await tryCatchAsync(() =>
+        getAllUserSalesPages(ctx.user.id, input.search),
+      );
 
-    if (error) throw toTRPCError(error);
+      if (error) throw toTRPCError(error);
 
-    return salesPages;
-  }),
+      return salesPages;
+    }),
 
   create: protectedProcedure
     .input(promptSchema)

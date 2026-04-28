@@ -3,11 +3,18 @@ import { db } from "@ai-sales-page/db/client";
 import { salesPages } from "@ai-sales-page/db/schema";
 import { NotFoundError, QueryError } from "./errors";
 
-type GeneratedContent = NonNullable<InferInsertModel<typeof salesPages>["generatedContent"]>;
+type GeneratedContent = NonNullable<
+  InferInsertModel<typeof salesPages>["generatedContent"]
+>;
 
-export async function getAllUserSalesPages(userId: string) {
+export async function getAllUserSalesPages(userId: string, search?: string) {
   const salesPages = await db.query.salesPages.findMany({
-    where: (salesPages, { eq }) => eq(salesPages.userId, userId),
+    where: (salesPages, { eq, and, ilike }) =>
+      and(
+        eq(salesPages.userId, userId),
+        search ? ilike(salesPages.productName, `%${search}%`) : undefined,
+      ),
+    orderBy: (salesPages, { desc }) => desc(salesPages.createdAt),
   });
 
   return salesPages;
