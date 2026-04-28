@@ -40,12 +40,12 @@ function RootComponent() {
         attribute="class"
         defaultTheme="dark"
         disableTransitionOnChange
-        storageKey="vite-ui-theme"
+        storageKey="ai-sales-page-theme"
       >
         <div className="grid grid-rows-[auto_1fr] h-svh">
           <Outlet />
         </div>
-        <Toaster richColors />
+        <Toaster position="top-right" richColors />
       </ThemeProvider>
       <TanStackRouterDevtools position="bottom-left" />
       <ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />

@@ -103,6 +103,34 @@ export const authRouter = createTRPCRouter({
       return result;
     }),
 
+  me: publicProcedure.query(async ({ ctx }) => {
+    if (!ctx.user && !ctx.hasAuthHeader) {
+      return null;
+    }
+
+    if (!ctx.user && ctx.hasAuthHeader) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "Invalid or expired access token",
+      });
+    }
+
+    const [user, err] = await tryCatchAsync(() => getUserById(ctx.user!.id));
+
+    if (err) throw toTRPCError(err);
+
+    if (!user)
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "User not found",
+      });
+
+    return {
+      ...user,
+      password: undefined,
+    };
+  }),
+
   refresh: publicProcedure
     .input(z.object({ token: z.string() }))
     .mutation(async ({ input }) => {

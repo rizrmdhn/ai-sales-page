@@ -136,6 +136,9 @@ importers:
       '@ai-sales-page/env':
         specifier: workspace:*
         version: link:../../packages/env
+      '@ai-sales-page/schema':
+        specifier: workspace:*
+        version: link:../../packages/schema
       '@base-ui/react':
         specifier: ^1.4.1
         version: 1.4.1(@date-fns/tz@1.4.1)(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -205,6 +208,9 @@ importers:
       react-dom:
         specifier: ^19.2.5
         version: 19.2.5(react@19.2.5)
+      react-hook-form:
+        specifier: ^7.74.0
+        version: 7.74.0(react@19.2.5)
       react-resizable-panels:
         specifier: ^4.10.0
         version: 4.10.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -217,6 +223,9 @@ importers:
       sonner:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
+      superjson:
+        specifier: 'catalog:'
+        version: 2.2.6
       tailwind-merge:
         specifier: ^3.5.0
         version: 3.5.0
