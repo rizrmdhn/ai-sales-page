@@ -7,8 +7,11 @@
     "./*": "./src/*.ts"
   },
   "scripts": {
-    "clean": "rm -rf .turbo node_modules",
-    "check-types": "tsc --noEmit"
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
     "typescript": "catalog:"
