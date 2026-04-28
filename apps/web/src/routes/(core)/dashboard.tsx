@@ -17,9 +17,10 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import useDebounced from "@/hooks/use-debounced";
+import { globalErrorToast, globalSuccessToast } from "@/lib/toasts";
 import { trpc } from "@/utils/trpc";
 import { IconFileOff, IconPlus, IconSearch } from "@tabler/icons-react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import z from "zod";
@@ -34,15 +35,18 @@ export const Route = createFileRoute("/(core)/dashboard")({
 function RouteComponent() {
   const params = Route.useSearch();
   const navigate = Route.useNavigate();
+  const queryClient = useQueryClient();
 
   const [search, setSearch] = useState(params.search ?? "");
   const debouncedSearch = useDebounced(search, 400);
+  const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set());
+  const [retryingIds, setRetryingIds] = useState<Set<string>>(new Set());
 
-  const { data: salesPages, isLoading } = useQuery(
-    trpc.salesPage.list.queryOptions({
-      search: debouncedSearch || undefined,
-    }),
-  );
+  const listQueryOptions = trpc.salesPage.list.queryOptions({
+    search: debouncedSearch || undefined,
+  });
+
+  const { data: salesPages, isLoading } = useQuery(listQueryOptions);
 
   useEffect(() => {
     navigate({
@@ -50,6 +54,45 @@ function RouteComponent() {
       replace: true,
     });
   }, [debouncedSearch]);
+
+  const deleteMutation = useMutation(
+    trpc.salesPage.delete.mutationOptions({
+      onSuccess: (_, { id }) => {
+        setDeletingIds((prev) => { const next = new Set(prev); next.delete(id); return next; });
+        globalSuccessToast("Sales page deleted.");
+        queryClient.invalidateQueries({ queryKey: listQueryOptions.queryKey });
+      },
+      onError: (error, { id }) => {
+        setDeletingIds((prev) => { const next = new Set(prev); next.delete(id); return next; });
+        globalErrorToast(error.message);
+      },
+    }),
+  );
+
+  const retryMutation = useMutation(
+    trpc.salesPage.retry.mutationOptions({
+      onSuccess: (_, { id }) => {
+        setRetryingIds((prev) => { const next = new Set(prev); next.delete(id); return next; });
+        globalSuccessToast("Sales page regenerated!");
+        queryClient.invalidateQueries({ queryKey: listQueryOptions.queryKey });
+      },
+      onError: (error, { id }) => {
+        setRetryingIds((prev) => { const next = new Set(prev); next.delete(id); return next; });
+        globalErrorToast(error.message);
+      },
+    }),
+  );
+
+  const handleDelete = (id: string) => {
+    setDeletingIds((prev) => new Set(prev).add(id));
+    deleteMutation.mutate({ id });
+  };
+
+  const handleRetry = (id: string) => {
+    if (retryingIds.size > 0) return;
+    setRetryingIds((prev) => new Set(prev).add(id));
+    retryMutation.mutate({ id });
+  };
 
   const renderSalesPages = () => {
     if (isLoading) {
@@ -89,9 +132,17 @@ function RouteComponent() {
     }
 
     return (
-      <div className="flex w-full flex-col items-start justify-start gap-4">
+      <div className="flex w-full flex-row items-start justify-start gap-4 flex-wrap">
         {salesPages?.map((page) => (
-          <SalesPageCard key={page.id} {...page} />
+          <SalesPageCard
+            key={page.id}
+            {...page}
+            isDeleting={deletingIds.has(page.id)}
+            isRetrying={retryingIds.has(page.id)}
+            onDelete={() => handleDelete(page.id)}
+            onRetry={() => handleRetry(page.id)}
+            onView={() => navigate({ to: "/sales-pages/$id", params: { id: page.id } })}
+          />
         ))}
       </div>
     );

@@ -16,6 +16,7 @@ import { Route as coreNewPageRouteImport } from './routes/(core)/new-page'
 import { Route as coreDashboardRouteImport } from './routes/(core)/dashboard'
 import { Route as authRegisterRouteImport } from './routes/(auth)/register'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
+import { Route as coreSalesPagesIdRouteImport } from './routes/(core)/sales-pages/$id'
 
 const coreRouteRoute = coreRouteRouteImport.update({
   id: '/(core)',
@@ -50,6 +51,11 @@ const authLoginRoute = authLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => authRouteRoute,
 } as any)
+const coreSalesPagesIdRoute = coreSalesPagesIdRouteImport.update({
+  id: '/sales-pages/$id',
+  path: '/sales-pages/$id',
+  getParentRoute: () => coreRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof authRegisterRoute
   '/dashboard': typeof coreDashboardRoute
   '/new-page': typeof coreNewPageRoute
+  '/sales-pages/$id': typeof coreSalesPagesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByTo {
   '/register': typeof authRegisterRoute
   '/dashboard': typeof coreDashboardRoute
   '/new-page': typeof coreNewPageRoute
+  '/sales-pages/$id': typeof coreSalesPagesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -74,12 +82,25 @@ export interface FileRoutesById {
   '/(auth)/register': typeof authRegisterRoute
   '/(core)/dashboard': typeof coreDashboardRoute
   '/(core)/new-page': typeof coreNewPageRoute
+  '/(core)/sales-pages/$id': typeof coreSalesPagesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register' | '/dashboard' | '/new-page'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/dashboard'
+    | '/new-page'
+    | '/sales-pages/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register' | '/dashboard' | '/new-page'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/dashboard'
+    | '/new-page'
+    | '/sales-pages/$id'
   id:
     | '__root__'
     | '/'
@@ -89,6 +110,7 @@ export interface FileRouteTypes {
     | '/(auth)/register'
     | '/(core)/dashboard'
     | '/(core)/new-page'
+    | '/(core)/sales-pages/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -148,6 +170,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authLoginRouteImport
       parentRoute: typeof authRouteRoute
     }
+    '/(core)/sales-pages/$id': {
+      id: '/(core)/sales-pages/$id'
+      path: '/sales-pages/$id'
+      fullPath: '/sales-pages/$id'
+      preLoaderRoute: typeof coreSalesPagesIdRouteImport
+      parentRoute: typeof coreRouteRoute
+    }
   }
 }
 
@@ -168,11 +197,13 @@ const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
 interface coreRouteRouteChildren {
   coreDashboardRoute: typeof coreDashboardRoute
   coreNewPageRoute: typeof coreNewPageRoute
+  coreSalesPagesIdRoute: typeof coreSalesPagesIdRoute
 }
 
 const coreRouteRouteChildren: coreRouteRouteChildren = {
   coreDashboardRoute: coreDashboardRoute,
   coreNewPageRoute: coreNewPageRoute,
+  coreSalesPagesIdRoute: coreSalesPagesIdRoute,
 }
 
 const coreRouteRouteWithChildren = coreRouteRoute._addFileChildren(

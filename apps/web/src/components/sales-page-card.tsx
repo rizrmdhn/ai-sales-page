@@ -11,11 +11,14 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Skeleton } from "./ui/skeleton";
+import { Spinner } from "./ui/spinner";
 
 interface SalesPageCardProps extends SalesPage {
   onView?: () => void;
   onRetry?: () => void;
   onDelete?: () => void;
+  isDeleting?: boolean;
+  isRetrying?: boolean;
 }
 
 const statusVariant: Record<
@@ -66,7 +69,11 @@ export function SalesPageCard({
   onView,
   onRetry,
   onDelete,
+  isDeleting = false,
+  isRetrying = false,
 }: SalesPageCardProps) {
+  const busy = isDeleting || isRetrying;
+
   return (
     <Card className="w-64">
       <CardHeader>
@@ -74,7 +81,7 @@ export function SalesPageCard({
           <CardTitle>{productName}</CardTitle>
           {status && (
             <Badge variant={statusVariant[status]}>
-              {status.charAt(0).toUpperCase() + status.slice(1)}
+              {isRetrying ? "Retrying…" : status.charAt(0).toUpperCase() + status.slice(1)}
             </Badge>
           )}
         </div>
@@ -88,7 +95,7 @@ export function SalesPageCard({
             &ldquo;{generatedContent.headline}&rdquo;
           </p>
         )}
-        {status === "failed" && (
+        {status === "failed" && !isRetrying && (
           <p className="rounded-md bg-destructive/10 px-3 py-1.5 text-xs text-destructive">
             Generation failed. Click retry to try again.
           </p>
@@ -100,14 +107,14 @@ export function SalesPageCard({
         </span>
         <div className="flex gap-1">
           {status === "generated" && (
-            <Button variant="ghost" size="xs" onClick={onView}>
+            <Button variant="ghost" size="xs" onClick={onView} disabled={busy}>
               <IconEye />
               View
             </Button>
           )}
           {status === "failed" && (
-            <Button variant="ghost" size="xs" onClick={onRetry}>
-              <IconRefresh />
+            <Button variant="ghost" size="xs" onClick={onRetry} disabled={busy}>
+              {isRetrying ? <Spinner /> : <IconRefresh />}
               Retry
             </Button>
           )}
@@ -116,8 +123,9 @@ export function SalesPageCard({
             size="icon-xs"
             className="text-destructive hover:bg-destructive/10 hover:text-destructive"
             onClick={onDelete}
+            disabled={busy}
           >
-            <IconTrash />
+            {isDeleting ? <Spinner /> : <IconTrash />}
           </Button>
         </div>
       </CardFooter>

@@ -13,7 +13,7 @@ export const env = createEnv({
     JWT_REFRESH_SECRET: z.string().min(1),
     JWT_ACCESS_TOKEN_EXPIRY: z.string().default("15m"),
     JWT_REFRESH_TOKEN_EXPIRY: z.string().default("7d"),
-    GEMINI_API_KEY: z.string().min(1),
+    GROQ_API_KEY: z.string().min(1),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,

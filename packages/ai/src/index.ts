@@ -1,18 +1,20 @@
 import { env } from "@ai-sales-page/env/server";
 import type { PromptInput } from "@ai-sales-page/schema/prompt.schema";
 import type { GeneratedContent } from "@ai-sales-page/types/generated-content.types";
-import { GoogleGenAI } from "@google/genai";
+import Groq from "groq-sdk";
 import { prompt } from "./prompt";
 
-const ai = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
+const groq = new Groq({ apiKey: env.GROQ_API_KEY });
 
 export async function generateSalesPage(
   input: PromptInput,
 ): Promise<GeneratedContent> {
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash-lite",
-    contents: prompt(input),
+  const response = await groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
+    messages: [{ role: "user", content: prompt(input) }],
+    response_format: { type: "json_object" },
   });
 
-  return JSON.parse(response.text ?? "{}") as GeneratedContent;
+  const text = response.choices[0]?.message?.content ?? "{}";
+  return JSON.parse(text) as GeneratedContent;
 }

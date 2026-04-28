@@ -1,6 +1,7 @@
 import { generateSalesPage } from "@ai-sales-page/ai";
 import {
   createSalesPage,
+  deleteSalesPage,
   getAllUserSalesPages,
   getSalesPageByIdAndUserId,
   updateSalesPageStatus,
@@ -61,11 +62,7 @@ export const salesPageRouter = createTRPCRouter({
     }),
 
   detail: protectedProcedure
-    .input(
-      z.object({
-        id: z.string(),
-      }),
-    )
+    .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const [salesPage, error] = await tryCatchAsync(() =>
         getSalesPageByIdAndUserId(input.id, ctx.user.id),
@@ -74,17 +71,63 @@ export const salesPageRouter = createTRPCRouter({
       if (error) throw toTRPCError(error);
 
       if (!salesPage)
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Sales page not found",
-        });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Sales page not found" });
 
       if (salesPage.userId !== ctx.user.id)
-        throw new TRPCError({
-          code: "FORBIDDEN",
-          message: "You are not the owner of this sales page",
-        });
+        throw new TRPCError({ code: "FORBIDDEN", message: "You are not the owner of this sales page" });
 
+      return salesPage;
+    }),
+
+  delete: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const [existing, fetchError] = await tryCatchAsync(() =>
+        getSalesPageByIdAndUserId(input.id, ctx.user.id),
+      );
+      if (fetchError) throw toTRPCError(fetchError);
+      if (!existing)
+        throw new TRPCError({ code: "NOT_FOUND", message: "Sales page not found" });
+
+      const [, deleteError] = await tryCatchAsync(() =>
+        deleteSalesPage(input.id),
+      );
+      if (deleteError) throw toTRPCError(deleteError);
+    }),
+
+  retry: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const [existing, fetchError] = await tryCatchAsync(() =>
+        getSalesPageByIdAndUserId(input.id, ctx.user.id),
+      );
+      if (fetchError) throw toTRPCError(fetchError);
+      if (!existing)
+        throw new TRPCError({ code: "NOT_FOUND", message: "Sales page not found" });
+
+      const promptInput = {
+        productName: existing.productName,
+        description: existing.description,
+        features: existing.features,
+        targetAudience: existing.targetAudience,
+        price: existing.price,
+        usp: existing.usp ?? "",
+      };
+
+      await updateSalesPageStatus(input.id, "pending");
+
+      const [generatedContent, genError] = await tryCatchAsync(() =>
+        generateSalesPage(promptInput),
+      );
+      if (genError) {
+        await updateSalesPageStatus(input.id, "failed");
+        throw toTRPCError(genError);
+      }
+
+      const [salesPage, updateError] = await tryCatchAsync(() =>
+        updateSalesPageStatus(input.id, "generated", generatedContent),
+      );
+      if (updateError) throw toTRPCError(updateError);
       return salesPage;
     }),
 });
