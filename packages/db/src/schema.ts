@@ -78,7 +78,7 @@ export const salesPages = createTable(
   {
     id: text("id")
       .primaryKey()
-      .$defaultFn(() => crypto.randomUUID()),
+      .$defaultFn(() => uuidv7()),
     userId: uuid("user_id")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
@@ -99,7 +99,6 @@ export const salesPages = createTable(
 
     ...timestamps,
   },
-
   (table) => [
     index("idx_sales_pages_user_id").on(table.userId),
     index("idx_sales_pages_status").on(table.status),
