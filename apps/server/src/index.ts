@@ -1,6 +1,7 @@
 import { createContext } from "@ai-sales-page/api/context";
 import { appRouter } from "@ai-sales-page/api/routers/index";
 import { env } from "@ai-sales-page/env/server";
+import { serve } from "@hono/node-server";
 import { trpcServer } from "@hono/trpc-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -31,4 +32,4 @@ app.get("/", (c) => {
   return c.text("OK");
 });
 
-export default app;
+serve({ fetch: app.fetch, port: 3000 });

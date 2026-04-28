@@ -3,5 +3,7 @@
   "compilerOptions": {
     "types": ["node"],
     "rootDir": "./src"
-  }
+  },
+  "include": ["*.ts", "src"],
+  "exclude": ["node_modules"]
 }
