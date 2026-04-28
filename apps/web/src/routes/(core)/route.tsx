@@ -1,3 +1,5 @@
+import { AppSidebar } from "@/components/main-sidebar/app-sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { authMeQueryOptions } from "@/utils/auth-query";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
@@ -27,5 +29,22 @@ export const Route = createFileRoute("/(core)")({
 });
 
 function CoreLayout() {
-  return <Outlet />;
+  return (
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "calc(var(--spacing) * 72)",
+          "--header-height": "calc(var(--spacing) * 12)",
+        } as React.CSSProperties
+      }
+    >
+      <AppSidebar variant="inset" />
+      <SidebarInset className="overflow-hidden contain-inline-size">
+        {/* <SiteHeader /> */}
+        <div className="overflow-y-auto p-4">
+          <Outlet />
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  );
 }
