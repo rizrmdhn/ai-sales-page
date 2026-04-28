@@ -50,7 +50,7 @@ async function refreshTokens() {
   isRefreshing = true;
   refreshPromise = (async () => {
     try {
-      const refreshToken = localStorage.getItem("refreshToken");
+      const refreshToken = auth.getRefreshToken();
 
       if (!refreshToken) {
         throw new Error("No refresh token available");

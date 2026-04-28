@@ -162,7 +162,7 @@ export const authRouter = createTRPCRouter({
         });
 
       const [user, userErr] = await tryCatchAsync(() =>
-        getUserById(storedToken.id),
+        getUserById(storedToken.userId),
       );
 
       if (userErr) throw toTRPCError(userErr);
