@@ -83,6 +83,8 @@ const steps = [
 ];
 
 function HomeComponent() {
+  const navigate = Route.useNavigate();
+
   return (
     <div className="min-h-screen bg-background font-sans">
       {/* ── Nav ────────────────────────────────────────────────────────────── */}
@@ -93,10 +95,26 @@ function HomeComponent() {
           </span>
           <div className="flex items-center gap-2">
             <ModeToggle />
-            <Button variant="ghost" size="sm" onClick={() => {}}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() =>
+                navigate({
+                  to: "/login",
+                })
+              }
+            >
               Sign in
             </Button>
-            <Button variant="default" size="sm" onClick={() => {}}>
+            <Button
+              variant="default"
+              size="sm"
+              onClick={() =>
+                navigate({
+                  to: "/register",
+                })
+              }
+            >
               Get started
             </Button>
           </div>
@@ -133,10 +151,18 @@ function HomeComponent() {
           </p>
 
           <div className="flex flex-wrap gap-2.5 justify-center">
-            <Button variant="default" size="lg" onClick={() => {}}>
+            <Button
+              variant="default"
+              size="lg"
+              onClick={() => navigate({ to: "/register" })}
+            >
               <IconSparkles className="size-4" /> Start generating free
             </Button>
-            <Button variant="outline" size="lg" onClick={() => {}}>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => navigate({ to: "/login" })}
+            >
               View demo
             </Button>
           </div>
@@ -220,7 +246,11 @@ function HomeComponent() {
             Join hundreds of creators and founders using Acme to ship sales
             pages faster.
           </p>
-          <Button variant="default" size="lg" onClick={() => {}}>
+          <Button
+            variant="default"
+            size="lg"
+            onClick={() => navigate({ to: "/register" })}
+          >
             <IconSparkles className="size-2.5" /> Get started for free
           </Button>
         </div>
