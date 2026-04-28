@@ -297,6 +297,9 @@ importers:
       '@ai-sales-page/queries':
         specifier: workspace:*
         version: link:../queries
+      '@ai-sales-page/schema':
+        specifier: workspace:*
+        version: link:../schema
       '@trpc/client':
         specifier: 'catalog:'
         version: 11.16.0(@trpc/server@11.16.0(typescript@6.0.3))(typescript@6.0.3)
@@ -411,6 +414,9 @@ importers:
       '@ai-sales-page/db':
         specifier: workspace:*
         version: link:../db
+      '@ai-sales-page/schema':
+        specifier: workspace:*
+        version: link:../schema
     devDependencies:
       typescript:
         specifier: 'catalog:'

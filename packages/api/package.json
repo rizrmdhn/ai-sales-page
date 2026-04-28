@@ -15,6 +15,7 @@
     "@ai-sales-page/db": "workspace:*",
     "@ai-sales-page/queries": "workspace:*",
     "@ai-sales-page/env": "workspace:*",
+    "@ai-sales-page/schema": "workspace:*",
     "@trpc/client": "catalog:",
     "@trpc/server": "catalog:",
     "dotenv": "catalog:",

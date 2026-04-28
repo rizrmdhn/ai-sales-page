@@ -16,3 +16,4 @@ catalog:
   "uuid": ^14.0.0
   "date-fns": ^4.1.0
   "superjson": ^2.2.6
+  "@node-rs/argon2": ^2.0.2
