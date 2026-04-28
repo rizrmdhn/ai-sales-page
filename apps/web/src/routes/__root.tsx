@@ -12,6 +12,7 @@ import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import type { trpc } from "@/utils/trpc";
 
+import { pageHead } from "@/lib/page-head";
 import "../index.css";
 
 export interface RouterAppContext {
@@ -22,15 +23,7 @@ export interface RouterAppContext {
 export const Route = createRootRouteWithContext<RouterAppContext>()({
   component: RootComponent,
   head: () => ({
-    meta: [
-      {
-        title: "ai-sales-page",
-      },
-      {
-        name: "description",
-        content: "ai-sales-page is a web application",
-      },
-    ],
+    ...pageHead("Home", "Welcome to the AI Sales Page!"),
     links: [
       {
         rel: "icon",
