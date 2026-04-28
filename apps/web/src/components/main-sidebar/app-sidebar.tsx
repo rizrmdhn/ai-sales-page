@@ -15,7 +15,7 @@ import { NavUser } from "./nav-user";
 
 const navItems = [
   { name: "Dashboard", icon: IconLayoutDashboard, url: "/dashboard" },
-  { name: "New Page", icon: IconPlus, url: "/projects" },
+  { name: "New Page", icon: IconPlus, url: "/new-page" },
 ];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

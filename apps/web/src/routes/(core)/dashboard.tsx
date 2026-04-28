@@ -75,7 +75,11 @@ function RouteComponent() {
             <EmptyDescription>
               Create your first AI-generated sales page to get started.
             </EmptyDescription>
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate({ to: "/new-page" })}
+            >
               <IconPlus />
               New Page
             </Button>
@@ -102,7 +106,7 @@ function RouteComponent() {
             Create and manage your AI-generated sales pages all in one place.
           </p>
         </div>
-        <Button variant="outline">
+        <Button variant="outline" onClick={() => navigate({ to: "/new-page" })}>
           <IconPlus className="mr-2" />
           New Page
         </Button>
