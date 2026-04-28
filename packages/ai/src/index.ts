@@ -10,7 +10,7 @@ export async function generateSalesPage(
   input: PromptInput,
 ): Promise<GeneratedContent> {
   const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
+    model: "gemini-2.0-flash-lite",
     contents: prompt(input),
   });
 
