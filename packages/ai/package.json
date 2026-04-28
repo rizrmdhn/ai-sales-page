@@ -16,6 +16,7 @@
   "dependencies": {
     "@ai-sales-page/env": "workspace:*",
     "@ai-sales-page/schema": "workspace:*",
+    "@ai-sales-page/types": "workspace:*",
     "@google/genai": "^1.50.1",
     "mime": "^4.1.0"
   }

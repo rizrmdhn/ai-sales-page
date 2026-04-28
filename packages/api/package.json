@@ -11,6 +11,7 @@
   },
   "scripts": {},
   "dependencies": {
+    "@ai-sales-page/ai": "workspace:*",
     "@ai-sales-page/auth": "workspace:*",
     "@ai-sales-page/db": "workspace:*",
     "@ai-sales-page/queries": "workspace:*",
