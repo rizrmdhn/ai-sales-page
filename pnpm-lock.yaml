@@ -263,6 +263,9 @@ importers:
 
   packages/ai:
     dependencies:
+      '@ai-sales-page/env':
+        specifier: workspace:*
+        version: link:../env
       '@ai-sales-page/schema':
         specifier: workspace:*
         version: link:../schema
