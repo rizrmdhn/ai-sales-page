@@ -6,17 +6,7 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**"],
-      "env": [
-        "DATABASE_URL",
-        "CORS_ORIGIN",
-        "NODE_ENV",
-        "GROQ_API_KEY",
-        "JWT_SECRET",
-        "JWT_REFRESH_SECRET",
-        "JWT_ACCESS_TOKEN_EXPIRY",
-        "JWT_REFRESH_TOKEN_EXPIRY",
-        "VITE_SERVER_URL"
-      ]
+      "env": ["VITE_SERVER_URL"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -42,5 +32,16 @@
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "globalEnv": ["NODE_ENV", "VITE_API_URL"],
+  "globalPassThroughEnv": [
+    "DATABASE_URL",
+    "NODE_ENV",
+    "CORS_ORIGIN",
+    "GROQ_API_KEY",
+    "JWT_SECRET",
+    "JWT_REFRESH_SECRET",
+    "JWT_ACCESS_TOKEN_EXPIRY",
+    "JWT_REFRESH_TOKEN_EXPIRY"
+  ]
 }
