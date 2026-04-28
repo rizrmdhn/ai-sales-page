@@ -1,5 +1,5 @@
-import { createContext } from "@ai-sales-page/api/context";
-import { appRouter } from "@ai-sales-page/api/routers/index";
+import { createTRPCContext } from "@ai-sales-page/api";
+import { appRouter } from "@ai-sales-page/api/root";
 import { env } from "@ai-sales-page/env/server";
 import { serve } from "@hono/node-server";
 import { trpcServer } from "@hono/trpc-server";
@@ -23,7 +23,7 @@ app.use(
   trpcServer({
     router: appRouter,
     createContext: (_opts, context) => {
-      return createContext({ context });
+      return createTRPCContext(context);
     },
   }),
 );

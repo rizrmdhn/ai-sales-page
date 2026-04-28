@@ -8,6 +8,8 @@ import type {
   SessionUser,
 } from "./types/auth.types";
 
+export type { AccessTokenPayload, JWTPayload, RefreshTokenPayload, SessionUser };
+
 const secretKey = env.JWT_SECRET;
 const key = new TextEncoder().encode(secretKey);
 
