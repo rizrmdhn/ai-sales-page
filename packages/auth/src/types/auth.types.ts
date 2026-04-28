@@ -10,7 +10,6 @@ export interface SessionUser {
 export interface JWTPayload extends JoseJWTPayload {
   id: string;
   email: string;
-  roles: string[];
   createdAt: string;
   updatedAt: string | null;
 }
@@ -18,7 +17,6 @@ export interface JWTPayload extends JoseJWTPayload {
 export interface AccessTokenPayload extends JoseJWTPayload {
   id: string;
   email: string;
-  roles: string[];
   createdAt: string;
   updatedAt: string | null;
 }
