@@ -18,10 +18,15 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { logout } from "@/lib/logout";
 import { User } from "@ai-sales-page/types/users.types";
 
 export function NavUser({ user }: { user: User }) {
   const { isMobile } = useSidebar();
+
+  function onLogout() {
+    logout();
+  }
 
   return (
     <SidebarMenu>
@@ -46,7 +51,7 @@ export function NavUser({ user }: { user: User }) {
               <span className="truncate font-medium">{user.name}</span>
               <span className="truncate text-xs">{user.email}</span>
             </div>
-            <IconSelector className="ml-auto size-4" />
+            <IconSelector className="ml-auto size-5! shrink-0" />
           </SidebarMenuButton>
           <DropdownMenuContent
             className="w-(--anchor-width) min-w-56 rounded-lg"
@@ -75,7 +80,7 @@ export function NavUser({ user }: { user: User }) {
               </DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={onLogout}>
               <IconLogout />
               Log out
             </DropdownMenuItem>

@@ -20,7 +20,7 @@ import { hash, verify } from "@node-rs/argon2";
 import { TRPCError } from "@trpc/server";
 import { v7 as uuidv7 } from "uuid";
 import z from "zod";
-import { createTRPCRouter, publicProcedure } from "..";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "..";
 import { toTRPCError } from "../utils/to-trpc-error";
 
 export const authRouter = createTRPCRouter({
@@ -226,5 +226,17 @@ export const authRouter = createTRPCRouter({
       if (storeRefreshTokenErr) throw toTRPCError(storeRefreshTokenErr);
 
       return { accessToken, refreshToken: newRefreshToken };
+    }),
+
+  logout: protectedProcedure
+    .input(z.object({ refreshToken: z.string() }))
+    .mutation(async ({ input }) => {
+      const [_, revokeErr] = await tryCatchAsync(() =>
+        revokeRefreshToken(input.refreshToken),
+      );
+
+      if (revokeErr) throw toTRPCError(revokeErr);
+
+      return { success: true, message: "Logged out successfully" };
     }),
 });

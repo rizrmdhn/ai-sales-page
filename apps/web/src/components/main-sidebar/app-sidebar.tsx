@@ -1,10 +1,4 @@
-import {
-  IconChartPie,
-  IconFrame,
-  IconLifebuoy,
-  IconMap,
-  IconSend,
-} from "@tabler/icons-react";
+import { IconLayoutDashboard, IconPlus } from "@tabler/icons-react";
 import * as React from "react";
 
 import {
@@ -16,40 +10,13 @@ import {
 import { trpc } from "@/utils/trpc";
 import { useQuery } from "@tanstack/react-query";
 import { ModeToggle } from "../mode-toggle";
-import { NavProjects } from "./nav-projects";
+import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
 
-const data = {
-  navSecondary: [
-    {
-      title: "Support",
-      url: "#",
-      icon: IconLifebuoy,
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: IconSend,
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: IconFrame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: IconChartPie,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: IconMap,
-    },
-  ],
-};
+const navItems = [
+  { name: "Dashboard", icon: IconLayoutDashboard, url: "/dashboard" },
+  { name: "New Page", icon: IconPlus, url: "/projects" },
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: user } = useQuery(trpc.auth.me.queryOptions());
@@ -65,7 +32,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </div>
       </SidebarHeader>
       <SidebarContent>
-        <NavProjects projects={data.projects} />
+        <NavMain navItems={navItems} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user} />

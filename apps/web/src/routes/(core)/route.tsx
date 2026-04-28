@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/main-sidebar/app-sidebar";
+import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { authMeQueryOptions } from "@/utils/auth-query";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
@@ -40,7 +41,7 @@ function CoreLayout() {
     >
       <AppSidebar variant="inset" />
       <SidebarInset className="overflow-hidden contain-inline-size">
-        {/* <SiteHeader /> */}
+        <SiteHeader />
         <div className="overflow-y-auto p-4">
           <Outlet />
         </div>

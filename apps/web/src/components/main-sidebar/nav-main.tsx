@@ -1,69 +1,41 @@
 "use client";
 
-import { IconChevronRight, type TablerIcon } from "@tabler/icons-react";
+import { type TablerIcon } from "@tabler/icons-react";
 
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { Link } from "@tanstack/react-router";
 
 export function NavMain({
-  items,
+  navItems,
 }: {
-  items: {
-    title: string;
+  navItems: {
+    name: string;
     url: string;
     icon: TablerIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
   }[];
 }) {
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarMenu>
-        {items.map((item) => (
-          <SidebarMenuItem key={item.title}>
-            <Collapsible defaultOpen={item.isActive} className="group/collapsible">
-              <SidebarMenuButton
-                render={<CollapsibleTrigger />}
-                tooltip={item.title}
-                className="group/collapsible-trigger"
-              >
-                <item.icon />
-                <span>{item.title}</span>
-                {item.items?.length ? (
-                  <IconChevronRight className="ml-auto transition-transform group-aria-expanded/collapsible-trigger:rotate-90" />
-                ) : null}
-              </SidebarMenuButton>
-              {item.items?.length ? (
-                <CollapsibleContent>
-                  <SidebarMenuSub>
-                    {item.items?.map((subItem) => (
-                      <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton render={<a href={subItem.url} />}>
-                          <span>{subItem.title}</span>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              ) : null}
-            </Collapsible>
+        {navItems.map((item) => (
+          <SidebarMenuItem key={item.name}>
+            <SidebarMenuButton
+              render={
+                <Link
+                  to={item.url}
+                  activeProps={{ "data-active": true }}
+                  activeOptions={{ exact: true }}
+                />
+              }
+            >
+              <item.icon />
+              <span>{item.name}</span>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
       </SidebarMenu>
