@@ -133,12 +133,7 @@ export function parseAndValidate<T extends z.ZodTypeAny>(
 export function parseAndValidateSafe<T extends z.ZodTypeAny>(
   formData: FormData,
   schema: T,
-): { success: true; data: z.infer<T> } | { success: false; error: z.ZodError } {
+) {
   const parsed = parseFormData(formData);
-  const result = schema.safeParse(parsed);
-
-  if (result.success) {
-    return { success: true, data: result.data };
-  }
-  return { success: false, error: result.error };
+  return schema.safeParse(parsed);
 }
