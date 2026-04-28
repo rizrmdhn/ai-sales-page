@@ -1,5 +1,14 @@
 import { GeneratedContent } from "@ai-sales-page/types/generated-content.types";
-import { index, jsonb, text, uuid } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+import {
+  boolean,
+  index,
+  jsonb,
+  text,
+  timestamp,
+  uuid,
+  varchar,
+} from "drizzle-orm/pg-core";
 import { v7 as uuidv7 } from "uuid";
 import { createTable, timestamps } from "./utils";
 
@@ -18,6 +27,49 @@ export const users = createTable(
   (table) => [
     index("idx_users_email").on(table.email),
     index("idx_users_id").on(table.id),
+  ],
+);
+
+export const refreshTokens = createTable(
+  "refresh_tokens",
+  {
+    id: uuid("id")
+      .primaryKey()
+      .notNull()
+      .$default(() => uuidv7()),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    token: text("token").notNull().unique(),
+    deviceInfo: text("device_info"),
+    os: text("os"),
+    version: varchar("version", { length: 100 }),
+    ipAddress: varchar("ip_address", { length: 45 }),
+    userAgent: text("user_agent"),
+    lastUsedAt: timestamp("last_used_at", {
+      withTimezone: true,
+      mode: "string",
+    }),
+    expiresAt: timestamp("expires_at", {
+      withTimezone: true,
+      mode: "string",
+    }).notNull(),
+    revoked: boolean("revoked").notNull().default(false),
+    revokedAt: timestamp("revoked_at", {
+      withTimezone: true,
+      mode: "string",
+    }),
+    createdAt: timestamp("created_at", {
+      withTimezone: true,
+      mode: "string",
+    })
+      .$default(() => sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+  },
+  (table) => [
+    index("refresh_token_user_id_idx").using("btree", table.userId),
+    index("refresh_token_token_idx").using("btree", table.token),
+    index("refresh_token_expires_at_idx").using("btree", table.expiresAt),
   ],
 );
 

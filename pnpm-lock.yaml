@@ -321,6 +321,9 @@ importers:
       superjson:
         specifier: 'catalog:'
         version: 2.2.6
+      uuid:
+        specifier: 'catalog:'
+        version: 14.0.0
       zod:
         specifier: 'catalog:'
         version: 4.3.6
