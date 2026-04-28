@@ -133,6 +133,9 @@ importers:
       '@ai-sales-page/api':
         specifier: workspace:*
         version: link:../../packages/api
+      '@ai-sales-page/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@ai-sales-page/env':
         specifier: workspace:*
         version: link:../../packages/env
@@ -466,10 +469,6 @@ importers:
         version: 6.0.3
 
   packages/types:
-    dependencies:
-      '@ai-sales-page/db':
-        specifier: workspace:*
-        version: link:../db
     devDependencies:
       typescript:
         specifier: 'catalog:'
