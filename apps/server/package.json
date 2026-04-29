@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ai-sales-page/api": "workspace:*",
+    "@node-rs/argon2": "catalog:",
     "@ai-sales-page/db": "workspace:*",
     "@ai-sales-page/env": "workspace:*",
     "@hono/node-server": "^1.13.7",
