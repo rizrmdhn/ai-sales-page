@@ -1,5 +1,5 @@
 [build]
-  command = "turbo run clean --filter web && turbo run build --filter web"
+  command = "turbo run clean --filter web && pnpm install && turbo run build --filter web"
   publish = "apps/web/dist"
 
 [build.environment]
