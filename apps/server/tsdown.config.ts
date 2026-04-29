@@ -6,7 +6,9 @@ export default defineConfig({
     app: "./src/app.ts",
   },
   format: "esm",
+  platform: "node",
   outDir: "./dist",
   clean: true,
+  shims: true,
   noExternal: [/@ai-sales-page\/.*/],
 });
