@@ -21,9 +21,20 @@ Show: landing/login page of the app.
 2. Navigate to **New Page**
 3. Fill in the form:
    - Product Name: `FlowDesk Pro`
-   - Description: `An AI-powered CRM that automates follow-ups`
-   - Features: add 3–4 bullet points
-   - Target Audience, Price, USP
+   - Description: `An AI-powered CRM that automates follow-ups and tracks every customer interaction in one place.`
+   - Features:
+     - `Automated email follow-ups`
+     - `Real-time pipeline analytics`
+     - `One-click meeting scheduling`
+     - `AI-generated call summaries`
+   - Target Audience: `Small to mid-size B2B sales teams looking to close more deals with less manual work`
+   - Tone: `Bold`
+   - Pain Points:
+     - `Spending hours manually writing follow-up emails`
+     - `Losing track of where each deal stands`
+     - `Missing follow-ups and letting leads go cold`
+   - Price: `$49/month per seat`
+   - USP: `The only CRM that writes your follow-up emails for you — saving reps 5+ hours per week`
 4. Hit **Generate**
 5. Show loading state (status: pending)
 6. Page loads — show the rendered result: headline, benefits, features, CTA
