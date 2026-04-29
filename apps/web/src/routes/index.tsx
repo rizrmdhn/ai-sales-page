@@ -35,7 +35,7 @@ const features = [
   {
     icon: <IconSparkles className="size-5" />,
     title: "AI-Powered Copy",
-    desc: "Gemini writes headlines, benefits, CTAs, and social proof — tailored to your product in seconds.",
+    desc: "Groq writes headlines, benefits, CTAs, and social proof — tailored to your product in seconds.",
   },
   {
     icon: <IconBolt className="size-5" />,
@@ -73,7 +73,7 @@ const steps = [
   {
     n: "02",
     title: "AI writes the copy",
-    desc: "Gemini generates a complete sales page with headline, benefits, and CTAs.",
+    desc: "Groq generates a complete sales page with headline, benefits, and CTAs.",
   },
   {
     n: "03",
@@ -136,7 +136,7 @@ function HomeComponent() {
           {/* pill badge */}
           <div className="inline-flex items-center gap-1.5 px-3 py-1 mb-7 rounded-full border border-border bg-card text-xs text-muted-foreground font-medium">
             <IconSparkles className="size-3" />
-            Powered by Gemini 2.0 Flash
+            Powered by Groq · Llama 3.3 70B
           </div>
 
           <h1 className="text-[clamp(2.5rem,6vw,4rem)] font-extrabold tracking-[-0.04em] leading-[1.05] mb-5 text-foreground">
@@ -168,7 +168,7 @@ function HomeComponent() {
           </div>
 
           <p className="mt-4 text-xs text-muted-foreground/70">
-            No credit card required · Free with Gemini API
+            No credit card required · Free with Groq API
           </p>
         </div>
       </section>
