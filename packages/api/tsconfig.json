@@ -8,5 +8,6 @@
     "composite": true,
     "types": ["node"],
     "lib": ["ES2022", "DOM"]
-  }
+  },
+  "exclude": ["dist", "node_modules"]
 }

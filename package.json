@@ -17,7 +17,8 @@
     "db:generate": "turbo -F @ai-sales-page/db db:generate",
     "db:migrate": "turbo -F @ai-sales-page/db db:migrate",
     "gen": "turbo gen init",
-    "regenerate:jwt": "node ./scripts/regenerate-jwt-secrets.js"
+    "regenerate:jwt": "node ./scripts/regenerate-jwt-secrets.js",
+    "clean": "turbo clean"
   },
   "dependencies": {
     "@ai-sales-page/env": "workspace:*",
