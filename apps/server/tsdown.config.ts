@@ -11,4 +11,5 @@ export default defineConfig({
   clean: true,
   shims: true,
   noExternal: [/@ai-sales-page\/.*/],
+  external: ["@node-rs/argon2"],
 });
