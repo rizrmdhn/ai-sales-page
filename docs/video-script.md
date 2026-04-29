@@ -28,11 +28,6 @@ Show: landing/login page of the app.
      - `One-click meeting scheduling`
      - `AI-generated call summaries`
    - Target Audience: `Small to mid-size B2B sales teams looking to close more deals with less manual work`
-   - Tone: `Bold`
-   - Pain Points:
-     - `Spending hours manually writing follow-up emails`
-     - `Losing track of where each deal stands`
-     - `Missing follow-ups and letting leads go cold`
    - Price: `$49/month per seat`
    - USP: `The only CRM that writes your follow-up emails for you — saving reps 5+ hours per week`
 4. Hit **Generate**
