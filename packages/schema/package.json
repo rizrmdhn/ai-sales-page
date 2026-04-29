@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./*": "./src/*.ts"
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./src/*.ts"
+    }
   },
   "scripts": {
     "build": "tsc",
@@ -17,6 +20,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@ai-sales-page/config": "workspace:*",
     "typescript": "catalog:"
   }
 }

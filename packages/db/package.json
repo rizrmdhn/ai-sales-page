@@ -3,9 +3,11 @@
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "default": "./src/index.ts"
     },
     "./*": {
+      "types": "./dist/*.d.ts",
       "default": "./src/*.ts"
     }
   },
@@ -22,7 +24,6 @@
   },
   "dependencies": {
     "@ai-sales-page/env": "workspace:*",
-    "@ai-sales-page/types": "workspace:*",
     "dotenv": "catalog:",
     "drizzle-orm": "^0.45.1",
     "postgres": "^3.4.9",
@@ -31,7 +32,7 @@
   },
   "devDependencies": {
     "@ai-sales-page/config": "workspace:*",
-    "@types/pg": "^8.16.0",
+    "@types/node": "catalog:",
     "drizzle-kit": "^0.31.8",
     "typescript": "catalog:"
   }

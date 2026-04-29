@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@ai-sales-page/api": "workspace:*",
-    "@ai-sales-page/db": "workspace:*",
     "@ai-sales-page/env": "workspace:*",
     "@ai-sales-page/schema": "workspace:*",
     "@ai-sales-page/types": "workspace:*",

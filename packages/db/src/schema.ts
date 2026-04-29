@@ -1,4 +1,3 @@
-import { GeneratedContent } from "@ai-sales-page/types/generated-content.types";
 import { sql } from "drizzle-orm";
 import {
   boolean,
@@ -10,6 +9,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 import { v7 as uuidv7 } from "uuid";
+import { GeneratedContent } from "./types";
 import { createTable, timestamps } from "./utils";
 
 export const users = createTable(

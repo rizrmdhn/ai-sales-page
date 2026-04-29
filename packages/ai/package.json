@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
+    }
   },
   "scripts": {
     "build": "tsc",
@@ -14,6 +17,7 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
+    "@ai-sales-page/config": "workspace:*",
     "typescript": "catalog:"
   },
   "dependencies": {
