@@ -1,4 +1,4 @@
-import type { SalesPage } from "@ai-sales-page/db";
+import type { SalesPage } from "@ai-sales-page/types/sales-pages.types.ts";
 import { IconEye, IconRefresh, IconTrash } from "@tabler/icons-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
@@ -81,7 +81,9 @@ export function SalesPageCard({
           <CardTitle>{productName}</CardTitle>
           {status && (
             <Badge variant={statusVariant[status]}>
-              {isRetrying ? "Retrying…" : status.charAt(0).toUpperCase() + status.slice(1)}
+              {isRetrying
+                ? "Retrying…"
+                : status.charAt(0).toUpperCase() + status.slice(1)}
             </Badge>
           )}
         </div>
