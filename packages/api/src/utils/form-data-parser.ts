@@ -53,7 +53,7 @@ type FormValue = string | number | boolean | File | FormValue[] | FormRecord;
 export function parseFormData(formData: FormData): Record<string, FormValue> {
   const result: Record<string, FormValue> = {};
 
-  formData.forEach((value, key) => {
+  for (const [key, value] of formData as unknown as Iterable<[string, string | File]>) {
     const coercedValue = coerceValue(value);
 
     // Handle array notation: field[]
@@ -63,13 +63,13 @@ export function parseFormData(formData: FormData): Record<string, FormValue> {
         result[cleanKey] = [];
       }
       (result[cleanKey] as FormValue[]).push(coercedValue);
-      return;
+      continue;
     }
 
     // Handle nested notation: field.nested or field[0]
     if (key.includes(".") || key.includes("[")) {
       setNestedValue(result, key, coercedValue);
-      return;
+      continue;
     }
 
     // Check if key already exists (multiple values with same name)
@@ -82,7 +82,7 @@ export function parseFormData(formData: FormData): Record<string, FormValue> {
     } else {
       result[key] = coercedValue;
     }
-  });
+  }
 
   return result;
 }
