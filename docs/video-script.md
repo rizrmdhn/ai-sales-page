@@ -7,7 +7,7 @@
 
 ## [0:00 – 0:30] Intro
 
-> "This is an AI-powered sales page generator built with a modern TypeScript full-stack. You give it your product details — name, description, features, pricing — and it produces a fully written sales page in seconds using a large language model. Let me walk through how it works from the UI all the way down to the AI call."
+> "Hi, welcome to the demo of AI Sales Page — an AI-powered sales page generator. In this video I'll show you how the app works, walk through the tech stack, and explain the key decisions behind how it's built. Let's get started."
 
 Show: landing/login page of the app.
 
