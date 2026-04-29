@@ -207,7 +207,7 @@ export const formDataProcedure = <T extends z.ZodTypeAny>(schema: T) =>
       });
     }
 
-    const parsed = parseAndValidateSafe(rawInput, schema);
+    const parsed = parseAndValidateSafe(rawInput as FormData, schema);
 
     if (!parsed.success) {
       // Format Zod errors into user-friendly messages
