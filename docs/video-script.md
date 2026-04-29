@@ -13,12 +13,28 @@ Show: landing/login page of the app.
 
 ---
 
-## [0:30 – 1:30] Live Demo (User Flow)
+## [0:30 – 2:00] Live Demo (User Flow)
 
 > "First I'll show you what the app actually does before we go into the code."
 
-1. Log in with a test account
-2. Navigate to **New Page**
+1. Go to **Register** page and fill in the form:
+   - Name: `John Doe`
+   - Email: `john@flowdesk.io`
+   - Password: `password123`
+   > "Users sign up with a name, email, and password. Passwords are hashed with Argon2 before being stored."
+
+2. Registration completes — redirected to the **Login** page.
+   > "After a successful registration, the user is sent to the login page."
+
+3. Log in with the same credentials:
+   - Email: `john@flowdesk.io`
+   - Password: `password123`
+   > "Login issues a short-lived JWT access token and a refresh token stored in the database."
+
+4. Redirected to the **Dashboard** — show the empty state.
+   > "Now we're in. The dashboard is empty — let's generate our first sales page."
+
+5. Navigate to **New Page**
 3. Fill in the form:
    - Product Name: `FlowDesk Pro`
    - Description: `An AI-powered CRM that automates follow-ups and tracks every customer interaction in one place.`
